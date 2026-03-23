@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import { projects } from '../../data/content';
+import { publicAsset } from '../../utils/publicAsset';
 
 // Define vibrant gradients for each card
 const cardGradients = [
@@ -41,7 +42,6 @@ export const Projects = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.slice(0, 3).map((project, index) => {
             const gradient = cardGradients[index % cardGradients.length];
-            const isSplitshare = project.title === 'Splitshare Application';
             const hasLiveDemo = Boolean(project.demoUrl && project.demoUrl !== '#');
 
             return (
@@ -91,7 +91,7 @@ export const Projects = () => {
                     {project.image ? (
                       <>
                         <img
-                          src={project.image}
+                          src={publicAsset(project.image)}
                           alt={project.title}
                           className="w-full h-full object-cover"
                         />
@@ -262,23 +262,17 @@ export const Projects = () => {
                         </span>
                       </motion.a>
                       
-                      {/* Live Demo Button */}
+                      {/* Live Demo Button — same UI for every project (e.g. Splitify, Customer Segmentation) */}
                       <motion.a
                         href={hasLiveDemo ? project.demoUrl! : '#'}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`relative flex-1 px-4 py-2.5 rounded-lg font-semibold text-white overflow-hidden group/live shadow-md flex items-center justify-center transition-shadow duration-300 ${
+                        className={`relative flex-1 px-4 py-2.5 rounded-lg font-semibold text-white overflow-hidden group/live shadow-md flex items-center justify-center ${
                           hasLiveDemo ? '' : 'opacity-50 cursor-not-allowed pointer-events-none'
-                        } ${
-                          isSplitshare && hasLiveDemo
-                            ? 'hover:shadow-[0_0_28px_rgba(34,197,94,0.55),0_0_48px_rgba(16,185,129,0.35)]'
-                            : ''
                         }`}
                         style={{
                           background: hasLiveDemo
-                            ? isSplitshare
-                              ? 'linear-gradient(90deg, #22c55e, #10b981, #059669, #22c55e)'
-                              : 'linear-gradient(90deg, #10b981, #059669, #047857, #10b981)'
+                            ? 'linear-gradient(90deg, #10b981, #059669, #047857, #10b981)'
                             : 'linear-gradient(90deg, #6b7280, #4b5563, #374151, #6b7280)',
                           backgroundSize: '200% 100%',
                           transformOrigin: 'center',
@@ -300,11 +294,8 @@ export const Projects = () => {
                         whileHover={
                           hasLiveDemo
                             ? {
-                                scale: isSplitshare ? 1.07 : 1.05,
-                                filter: isSplitshare ? 'brightness(1.18) saturate(1.15)' : 'brightness(1.1)',
-                                boxShadow: isSplitshare
-                                  ? '0 0 32px rgba(34, 197, 94, 0.65), 0 0 56px rgba(16, 185, 129, 0.45), 0 10px 28px rgba(5, 150, 105, 0.35)'
-                                  : undefined,
+                                scale: 1.05,
+                                filter: 'brightness(1.1)',
                                 transition: {
                                   duration: 0.3,
                                   ease: 'easeInOut',
@@ -331,15 +322,13 @@ export const Projects = () => {
                           <motion.div
                             className="absolute inset-0 rounded-lg blur-xl opacity-0"
                             style={{
-                              background: isSplitshare
-                                ? 'linear-gradient(90deg, #4ade80, #22c55e, #10b981)'
-                                : 'linear-gradient(90deg, #10b981, #059669, #047857)',
+                              background: 'linear-gradient(90deg, #10b981, #059669, #047857)',
                             }}
                             animate={{
-                              opacity: isSplitshare ? [0, 0.75, 0] : [0, 0.6, 0],
+                              opacity: [0, 0.6, 0],
                             }}
                             transition={{
-                              duration: isSplitshare ? 1.8 : 2,
+                              duration: 2,
                               repeat: Infinity,
                               ease: 'easeInOut',
                             }}
@@ -349,16 +338,10 @@ export const Projects = () => {
                         {/* Hover Glow Effect */}
                         {hasLiveDemo && (
                           <motion.div
-                            className={`absolute -inset-2 rounded-lg blur-xl opacity-0 pointer-events-none ${
-                              isSplitshare ? 'group-hover/live:opacity-90' : 'group-hover/live:opacity-70'
-                            }`}
+                            className="absolute -inset-2 rounded-lg blur-xl opacity-0 pointer-events-none group-hover/live:opacity-70"
                             style={{
-                              background: isSplitshare
-                                ? 'linear-gradient(90deg, #4ade80, #22c55e, #10b981)'
-                                : 'linear-gradient(90deg, #10b981, #059669, #047857)',
-                              boxShadow: isSplitshare
-                                ? '0 0 40px rgba(34, 197, 94, 0.75)'
-                                : '0 0 30px rgba(16, 185, 129, 0.5)',
+                              background: 'linear-gradient(90deg, #10b981, #059669, #047857)',
+                              boxShadow: '0 0 30px rgba(16, 185, 129, 0.5)',
                             }}
                             transition={{
                               duration: 0.3,

@@ -38,13 +38,42 @@ npm install
 ```bash
 npm run dev
 ```
+   Open **http://localhost:5180** (this repo uses **5180** by default so it does not clash with other apps on 5173).  
+   For port 5173 instead: `npm run dev:5173`.
 
-3. Build for production:
+3. **If you see `vite: command not found`**  
+   Dependencies are missing or broken. From this project folder run:
+   ```bash
+   rm -rf node_modules
+   npm install
+   npm run dev
+   ```
+
+4. **If you still see Splitify or the wrong app**  
+   Make sure the URL is **http://localhost:5180/** (portfolio) — **not** `5173/login`.  
+   Only this Portfolio folder should be running `npm run dev`.
+
+5. Build for production:
 ```bash
 npm run build
 ```
+   - Use this for **Vercel**, **Netlify**, or any host at the **domain root** (`/`).
 
-4. Preview production build:
+6. **GitHub Pages** (site URL: `https://<user>.github.io/Portfolio/`)
+
+   **Option A — automatic (recommended)**  
+   Push to `main`. The workflow `.github/workflows/deploy-github-pages.yml` builds with the correct base and deploys.  
+   In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+   **Option B — manual `gh-pages` branch**
+   ```bash
+   npm run deploy
+   ```
+   (`predeploy` runs `build:github`, which uses `vite build --base /Portfolio/`.)
+
+   **Blank page?** Almost always means the production build used `base: '/'` instead of `/Portfolio/`. Use Option A or B, or run `npm run preview:github` locally to verify.
+
+7. Preview production build:
 ```bash
 npm run preview
 ```

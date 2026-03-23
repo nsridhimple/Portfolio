@@ -287,10 +287,10 @@ export const education: Education[] = [
 
 export const projects: Project[] = [
   {
-    title: "Splitshare Application",
-    description: "A modern expense-sharing application that allows users to split bills and expenses seamlessly. Built with real-time synchronization and intuitive user interface for managing group expenses efficiently.",
-    technologies: ["React", "Node.js", "AWS", "MongoDB"],
-    demoUrl: "https://splitify-mu.vercel.app/login",
+    title: "Splitify",
+    description: "Splitify — split expenses with friends and groups in real time: shared bills, balances, settle-up, notifications, and a polished glassmorphism UI. Built with React, Vite, and Firebase.",
+    technologies: ["React", "Vite", "Firebase", "Firestore"],
+    demoUrl: "https://splitify-mu.vercel.app",
     codeUrl: "https://github.com/nsridhimple/Splitify",
     image: "/splitshare.jpeg",
   },

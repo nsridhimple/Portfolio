@@ -1,9 +1,21 @@
+import { useState } from 'react';
 import { Code2, Server, Github, Linkedin, BookOpen, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../../data/content';
+import { publicAsset } from '../../utils/publicAsset';
+import profilePhotoBundled from '../../assets/profile.jpeg';
+
+/** Prefer bundled image (always correct with any Vite `base`). Optional `personalInfo.image`: full URL or public path. */
+function profilePhotoSrc(): string {
+  const raw = personalInfo.image?.trim();
+  if (!raw) return profilePhotoBundled;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return publicAsset(raw);
+}
 
 export const Summary = () => {
-  const profileImageSrc = personalInfo.image || '/SRI.jpeg';
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const profileImageSrc = profilePhotoSrc();
 
   const expertiseCards = [
     {
@@ -51,11 +63,25 @@ export const Summary = () => {
           <div className="image-card">
             <div className="profile-image-wrapper">
               <div className="profile-image-ring">
-                <img
-                  src={profileImageSrc}
-                  alt={`${personalInfo.name} profile photo`}
-                  className="profile-image"
-                />
+                {!photoFailed ? (
+                  <img
+                    src={profileImageSrc}
+                    alt={`${personalInfo.name} profile photo`}
+                    className="profile-image"
+                    onError={() => setPhotoFailed(true)}
+                  />
+                ) : (
+                  <div
+                    className="profile-image flex items-center justify-center bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white text-4xl font-bold"
+                    aria-hidden
+                  >
+                    {personalInfo.name
+                      .split(' ')
+                      .map((n) => n[0])
+                      .join('')
+                      .slice(0, 2)}
+                  </div>
+                )}
               </div>
             </div>
 

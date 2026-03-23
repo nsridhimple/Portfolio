@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { experience } from '../../data/content';
+import { publicAsset } from '../../utils/publicAsset';
 import { SkillPill } from '../ui/SkillPill';
 import { Briefcase } from 'lucide-react';
 
@@ -52,7 +53,7 @@ export const Experience = () => {
                     >
                       {exp.logo ? (
                         <img
-                          src={exp.logo}
+                          src={publicAsset(exp.logo)}
                           alt={`${exp.company} logo`}
                           className={`w-full h-full rounded-full ${
                             exp.company === 'General Dynamics Information Technology' 
