@@ -71,7 +71,7 @@ export const personalInfo: PersonalInfo = {
   email: "sridhimplen03@gmail.com",
   phone: "+1 (314) 224-2814",
   linkedin: "linkedin.com/in/sridhimple-nuthalapati",
-  github: "github.com/SridhimpleNuthalapati",
+  github: "github.com/nsridhimple",
 };
 
 export const summary: SummaryItem[] = [
@@ -290,8 +290,8 @@ export const projects: Project[] = [
     title: "Splitshare Application",
     description: "A modern expense-sharing application that allows users to split bills and expenses seamlessly. Built with real-time synchronization and intuitive user interface for managing group expenses efficiently.",
     technologies: ["React", "Node.js", "AWS", "MongoDB"],
-    demoUrl: "#",
-    codeUrl: "#",
+    demoUrl: "https://splitify-mu.vercel.app",
+    codeUrl: "https://github.com/nsridhimple/Splitify",
     image: "/splitshare.jpeg",
   },
   {
@@ -299,7 +299,7 @@ export const projects: Project[] = [
     description: "An intelligent customer segmentation platform using machine learning algorithms to categorize customers based on behavior and preferences. Enables targeted marketing strategies and personalized experiences.",
     technologies: ["Python", "Streamlit", "Scikit-learn", "Machine Learning"],
     demoUrl: "https://customer-segmentation-system-dyh997iusci9njgq5hefxn.streamlit.app/",
-    codeUrl: "https://github.com/SridhimpleNuthalapati/Customer-Segmentation-System/tree/main",
+    codeUrl: "https://github.com/nsridhimple/Customer-Segmentation",
     image: "/customer.jpg.avif",
   },
   {
